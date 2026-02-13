@@ -1,0 +1,74 @@
+{
+	"name": "parallel-branch",
+	"displayName": "Parallel Branch",
+	"description": "Open Git branches in separate VS Code windows using worktrees",
+	"version": "0.1.0",
+	"publisher": "your-publisher-name",
+	"engines": {
+		"vscode": "^1.85.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:parallel-branch.openBranchInNewWindow",
+		"onCommand:parallel-branch.manageWorktrees",
+		"onCommand:parallel-branch.pruneWorktrees"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "parallel-branch.openBranchInNewWindow",
+				"title": "Parallel Branch: Open Branch in New Window"
+			},
+			{
+				"command": "parallel-branch.manageWorktrees",
+				"title": "Parallel Branch: Manage Worktrees"
+			},
+			{
+				"command": "parallel-branch.pruneWorktrees",
+				"title": "Parallel Branch: Prune Worktrees"
+			}
+		],
+		"configuration": {
+			"title": "Parallel Branch",
+			"properties": {
+				"parallelBranch.worktreeFolderPattern": {
+					"type": "string",
+					"default": "_wt_{branch}",
+					"description": "Pattern for worktree folder names. Use {branch}"
+				},
+				"parallelBranch.openAfterCreate": {
+					"type": "boolean",
+					"default": true,
+					"description": "Automatically open the worktree in a new window"
+				},
+				"parallelBranch.autoFetch": {
+					"type": "boolean",
+					"default": true,
+					"description": "Automatically fetch remote branches before showing"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js",
+		"package": "vsce package",
+		"publish": "vsce publish"
+	},
+	"devDependencies": {
+		"@types/node": "20.17.10",
+		"@types/vscode": "^1.85.0",
+		"@typescript-eslint/eslint-plugin": "^6.x",
+		"@typescript-eslint/parser": "^6.x",
+		"eslint": "^8.x",
+		"typescript": "^5.3.0",
+		"@vscode/vsce": "^2.22.0"
+	}
+}
